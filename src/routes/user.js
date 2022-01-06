@@ -3,6 +3,7 @@ const router=express.Router()
 const User=require('../models/User')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const CircularJSON = require('circular-json')
 
 
 const createToken = (userId) => {
@@ -14,7 +15,7 @@ const createToken = (userId) => {
 
 
 
-router.post('/register', async (req, res) => {
+router.post('/users', async (req, res) => {
     if(req.body.username.length < 5){
         res.send("Username should be at least 5 characters.")
     }
@@ -24,8 +25,18 @@ router.post('/register', async (req, res) => {
     else if(req.body.username.length > 5 && req.body.passwd.length < 5){
         res.send("Password should be at least 5 characters.")
     }else {
-        let user = await User.create({username: req.body.username, email: req.body.email ,passwd: await bcrypt.hash(req.body.passwd, 10)})
-        .catch((err) => res.send({message: err.message}))
+        const payload = {
+            username: req.body.username,
+            first_name:  req.body.first_name,
+            surname: req.body.surname,
+            personal_number: req.body.personal_number,
+            email: req.body.email,
+            role_id:req.body.role_id, 
+            passwd: await bcrypt.hash(req.body.passwd, 10)
+        }
+
+
+        let user = await User.create(payload).catch((err) => res.send({message: err.message}))
         const getResponse = user => ({
             status: "success", 
             code: 200,
@@ -71,6 +82,14 @@ router.post('/login', function (req, res) {
     })
 });
 
+
+
+
+router.get('/users', async (req, res) => {
+    const users = await User.findAll({}).catch((err) => res.send({message: err.message}))
+
+    return res.send(users)
+})
 
 
 router.get('/logout', (req, res) => {

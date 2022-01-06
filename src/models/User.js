@@ -20,5 +20,18 @@ module.exports = sequelize.define("User", {
     passwd:{
         type: Sequelize.STRING,
         allowNull: false,
-    }
+    },
+    first_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    surname: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    personal_number: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    role_id: Sequelize.INTEGER(11)
 })
