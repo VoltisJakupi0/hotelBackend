@@ -33,7 +33,6 @@ const auth = require('./middleware/auth');
 
 
 const user= require('./src/routes/user.js')
-const clients= require('./src/routes/client.js')
 const status= require('./src/routes/status.js')
 const category = require("./src/routes/category.js")
 const invoice = require("./src/routes/invoice.js")
@@ -42,8 +41,6 @@ const room = require("./src/routes/room.js")
 const bookedroom = require("./src/routes/bookedroom.js")
 
 
-app.use('/api', user) 
-app.use('/api', clients) 
 app.use('/api', user) 
 app.use('/api', status) 
 app.use('/api', category) 

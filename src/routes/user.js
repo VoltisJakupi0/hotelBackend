@@ -14,6 +14,17 @@ const createToken = (userId) => {
 }
 
 
+router.delete('/users/:userId', async (req, res) => {
+    const user = await User.destroy({where: {id: req.params.userId}})
+    if(user) {
+        return res.send("User was deleted succesfully.")
+    }else{ 
+        return res.send("The given ID was not found.") 
+    }
+})
+
+
+
 
 router.post('/users', async (req, res) => {
     if(req.body.username.length < 5){
@@ -83,6 +94,23 @@ router.post('/login', function (req, res) {
 });
 
 
+router.patch('/users/:userId', async (req, res) => {
+    
+    let userPayload = {
+        username: req.body.username,
+        first_name:  req.body.first_name,
+        surname: req.body.surname,
+        personal_number: req.body.personal_number,
+        email: req.body.email,
+        role_id:req.body.role_id, 
+        passwd: await bcrypt.hash(req.body.passwd, 10)
+    }
+    const  editUser = await User.update(userPayload,{ where: { id: req.params.userId } })
+    .catch((err) => res.send({message: err.message}))
+
+    return res.send(editUser)
+})
+
 
 
 router.get('/users', async (req, res) => {
@@ -90,6 +118,7 @@ router.get('/users', async (req, res) => {
 
     return res.send(users)
 })
+
 
 
 router.get('/logout', (req, res) => {

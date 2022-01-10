@@ -1,6 +1,8 @@
 const express=require('express')
 const router=express.Router()
 const Room=require('../models/Room')
+const Category=require('../models/Category')
+const Status=require('../models/Status')
 const User=require('../models/User')
 const jwt = require("jsonwebtoken")
 const Joi = require("joi")
@@ -17,12 +19,22 @@ function validateCourse(course){
 
 
 router.post('/rooms', async (req, res) => {  
+    const category = await Category.findByPk(req.body.category_id)
+    const status = await Status.findByPk(req.body.status_id)
+
     let room = {
         room_number: req.body.room_number,
         category_id: req.body.category_id,
         status_id: req.body.status_id,
-        room_price: req.body.room_price
+        room_price: req.body.room_price,
+        categoryName: category.category_name,
+        statusName: status.status_name
+
     }
+
+
+
+    
    
     // var {error} = validateCourse(req.body)
 

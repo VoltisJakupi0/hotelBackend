@@ -23,5 +23,12 @@ module.exports = sequelize.define("Client", {
     phone_number: {
         type: Sequelize.STRING(50),
         allowNull: false,
-    }
+    },
+    client_personal_number: Sequelize.INTEGER(30),
+    client_email: Sequelize.STRING(30),
+    client_name: Sequelize.STRING(30),
+    client_surname: Sequelize.STRING(30),
+
+
+    
 })

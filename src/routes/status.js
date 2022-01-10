@@ -63,13 +63,11 @@ router.delete('/status/:statusId', async (req, res) => {
 })
 
 
-router.put('/status/:statusId', async (req, res) => {
-    let task = {
-        taskName: req.body.taskName,
-        description: req.body.description,
-        userId: req.userId
+router.patch('/status/:statusId', async (req, res) => {
+    let statusPayload = {
+       status_name: req.body.status_name
     }
-    const  editStatus = await Status.update(task,{ where: { id: req.params.statusId } })
+    const  editStatus = await Status.update(statusPayload,{ where: { id: req.params.statusId } })
     .catch((err) => res.send({message: err.message}))
     const status = await Status.findByPk(req.params.statusId)
 

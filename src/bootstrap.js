@@ -13,7 +13,6 @@ module.exports  = async () => {
     Room.belongsTo(Category,{as: "Category", foreignKey: 'category_id'})
     Room.belongsTo(Status,{as: "Status", foreignKey: 'status_id'})
     BookedRoom.belongsTo(Room,{as: "Room", foreignKey: 'room_id'})
-    BookedRoom.belongsTo(Client,{as: "Client", foreignKey: 'client_id'})
 
 
 }

@@ -11,7 +11,9 @@ module.exports = {
     },
     room_number: Sequelize.INTEGER(11),
     category_id: Sequelize.INTEGER(30),
+    categoryName: Sequelize.STRING(30),
     status_id: Sequelize.INTEGER(30),
+    statusName: Sequelize.STRING(30),
     room_price: Sequelize.INTEGER(30),
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE

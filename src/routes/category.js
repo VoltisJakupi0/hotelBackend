@@ -54,7 +54,7 @@ router.get('/category/:categoryId', async (req, res) => {
 
 
 router.delete('/category/:categoryId', async (req, res) => {
-    const category = await Category.destroy({where: {id: req.params.CategoryId}})
+    const category = await Category.destroy({where: {id: req.params.categoryId}})
     if(category) {
         return res.send("Category was deleted succesfully.")
     }else{ 
@@ -63,11 +63,11 @@ router.delete('/category/:categoryId', async (req, res) => {
 })
 
 
-router.put('/category/:categoryId', async (req, res) => {
-    let task = {
+router.patch('/category/:categoryId', async (req, res) => {
+    let categoryPayload = {
         category_name: req.body.category_name
     }
-    const editCategory = await Category.update(task,{ where: { id: req.params.CategoryId } })
+    const editCategory = await Category.update(categoryPayload,{ where: { id: req.params.categoryId } })
     .catch((err) => res.send({message: err.message}))
     const category = await Category.findByPk(req.params.CategoryId)
 

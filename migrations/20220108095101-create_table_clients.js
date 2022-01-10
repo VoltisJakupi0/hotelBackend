@@ -26,6 +26,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    client_personal_number: Sequelize.INTEGER(30),
+    client_email: Sequelize.STRING(30),
+    client_name: Sequelize.STRING(30),
+    client_surname: Sequelize.STRING(30),
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE
     })
