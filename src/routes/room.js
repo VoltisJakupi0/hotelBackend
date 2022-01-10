@@ -78,13 +78,20 @@ router.delete('/rooms/:roomId', async (req, res) => {
 })
 
 
-router.put('/rooms/:roomId', async (req, res) => {
-    let task = {
-        taskName: req.body.taskName,
-        description: req.body.description,
-        userId: req.userId
+router.patch('/rooms/:roomId', async (req, res) => {
+    const category = await Category.findByPk(req.body.category_id)
+    const status = await Status.findByPk(req.body.status_id)
+
+    let room = {
+        room_number: req.body.room_number,
+        category_id: req.body.category_id,
+        status_id: req.body.status_id,
+        room_price: req.body.room_price,
+        categoryName: category.category_name,
+        statusName: status.status_name
     }
-    const createRoom = await Room.update(task,{ where: { id: req.params.roomId } })
+
+    const createRoom = await Room.update(room,{ where: { id: req.params.roomId } })
     .catch((err) => res.send({message: err.message}))
     const getRoom = await Room.findByPk(req.params.roomId)
 
