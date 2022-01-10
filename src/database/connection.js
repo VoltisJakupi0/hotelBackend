@@ -9,7 +9,7 @@ const sequelize = new Sequelize("dfjnm25kkaakb3", 'wjhlwvcbtytkmy', '233a481ed43
 },
 })
 
-sequelize.sync()
+// sequelize.sync()
 
 
 module.exports = sequelize
