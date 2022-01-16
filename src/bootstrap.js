@@ -13,5 +13,6 @@ module.exports  = async () => {
     BookedRoom.belongsTo(Room,{as: "Room", foreignKey: 'room_id'})
 
 
+
 }
 
